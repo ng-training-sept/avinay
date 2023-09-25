@@ -15,21 +15,5 @@ import { HeaderComponent } from './components/header/header.component';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
-  persons: string[] = ['Chris', 'Adam'];
-
-  addCard(title: string): void {
-    this.persons.push(title);
-  }
 }
 
-
-
-/*
-
-CURRENCY -> 2000
-
-UI -> $2000, NRs. 20000
- pipe -> input -> transformed input (output)
-
- */
