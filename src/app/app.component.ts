@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from './components/card/card.component';
 import { HeaderComponent } from './components/header/header.component';
+import { SportsComponent } from './forms/sports/sports.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +11,9 @@ import { HeaderComponent } from './components/header/header.component';
   imports: [
     CommonModule,
     CardComponent,
-    HeaderComponent
+    HeaderComponent,
+    SportsComponent,
+    RouterOutlet
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
