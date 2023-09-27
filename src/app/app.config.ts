@@ -1,14 +1,16 @@
 import { ApplicationConfig } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, Routes } from '@angular/router';
-import { CardItemComponent } from './components/card/card-item/card-item.component';
+import { authGuard } from './service/auth.constants';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/sports', pathMatch: 'full' },
-  //{path: 'sports', component: SportsComponent}, // Eagerly loading route
-
-  { path: 'sports', loadComponent: () => import('./forms/sports/sports.component').then(m => m.SportsComponent) }, // Lazily loading route
-  { path: 'sports/card-item/:id', component: CardItemComponent}
+  { path: '', redirectTo: '', pathMatch: 'full' },
+  { path: 'sports', loadChildren: () => import('./forms/sports/sports.route').then(m => m.routes) },
+  {
+    path: 'grocery',
+    loadChildren: () => import('./forms/grocery/grocery.route').then(m => m.routes),
+    canActivate: [authGuard]
+  },
 ];
 
 export const appConfig: ApplicationConfig = {

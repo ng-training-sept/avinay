@@ -8,6 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import { ReversePipe } from '../../pipes/reverse.pipe';
 import { Card } from './card.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ItemSaveUpdateComponent } from '../item-save-update/item-save-update.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-card',
@@ -23,7 +25,8 @@ import { ActivatedRoute, Router } from '@angular/router';
     DatePipe,
     ReversePipe,
     UpperCasePipe,
-    SlicePipe
+    SlicePipe,
+    MatDialogModule
   ],
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss']
@@ -32,12 +35,23 @@ export class CardComponent {
 
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
+  private readonly dialog = inject(MatDialog);
 
   @Input() cards: Card[] = [];
 
-// ['mypage', 'child'] /mypage/child
   goToItemDetails(data: Card): void {
-    // this.router.navigateByUrl(`/sports/card-item/${data.id}`, {state: {data}});
     this.router.navigate(['card-item', data.id], {state: {data}, relativeTo: this.route}).then();
+  }
+
+  openItemDialog(data: Card): void {
+    const dialogRef = this.dialog.open(ItemSaveUpdateComponent, {
+      data // initial data to dialog (remember dialogData in ItemSaveUpdateComponent)
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result?.data) {
+        console.log(result.data);
+        // emit update event and call service from parent to update card
+      }
+    });
   }
 }

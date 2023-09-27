@@ -5,37 +5,34 @@ import { CardComponent } from '../../components/card/card.component';
 import { AuthService } from '../../service/auth.service';
 
 @Component({
-  selector: 'app-sports',
+  selector: 'app-grocery',
   standalone: true,
   imports: [CommonModule, CardComponent],
-  providers: [
-    AuthService
-  ],
-  templateUrl: './sports.component.html',
-  styleUrls: ['./sports.component.scss']
+  templateUrl: './grocery.component.html',
+  styleUrls: ['./grocery.component.scss']
 })
-export class SportsComponent implements OnInit {
+export class GroceryComponent implements OnInit {
 
   private readonly authService = inject(AuthService);
 
-  sportsCard!: Card[];
+  groceries!: Card[];
 
   ngOnInit(): void {
-    console.log('Sports Component: ' + this.authService.whoAmI());
-    this.sportsCard = [
+    console.log('Grocery Component: ' + this.authService.whoAmI());
+    this.groceries = [
       {
         id: '1',
-        name: 'Football',
-        price: 1500,
+        name: 'Tomato',
+        price: 100,
         imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/1/1d/Football_Pallo_valmiina-cropped.jpg',
-        description: 'Football description'
+        description: 'Tomato'
       },
       {
         id: 'id2',
-        name: 'Football Boot',
+        name: 'Onion',
         price: 6000,
-        imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/AdidasEtruscoBoot.jpg/230px-AdidasEtruscoBoot.jpg',
-        description: 'Football description'
+        imageUrl: 'https://en.wikipedia.org/wiki/File:Mixed_onions.jpg',
+        description: 'Onion'
       }
     ];
   }

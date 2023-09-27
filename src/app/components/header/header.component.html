@@ -1,5 +1,10 @@
 <mat-toolbar color="primary">
   <span>Angular Basic</span>
-  <button mat-button>Grocery</button>
+  <button mat-button routerLink="/grocery">Grocery</button>
   <button mat-button routerLink="/sports">Sports</button>
+  <button (click)="addNew()" mat-button>Add New</button>
+  <span class="spacer"></span>
+  <button (click)="login()" mat-icon-button aria-label="login">
+    <mat-icon>login</mat-icon>
+  </button>
 </mat-toolbar>
