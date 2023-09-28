@@ -3,13 +3,17 @@ import { CommonModule } from '@angular/common';
 import { Card } from '../../components/card/card.model';
 import { CardComponent } from '../../components/card/card.component';
 import { AuthService } from '../../service/auth.service';
+import { LoggerService } from '../../service/logger.service';
+import { NewLoggerService } from '../../service/new-logger.service';
+import { LOGGER } from '../../service/logger';
 
 @Component({
   selector: 'app-sports',
   standalone: true,
   imports: [CommonModule, CardComponent],
   providers: [
-    AuthService
+    AuthService,
+    {provide: LOGGER, useClass: LoggerService}
   ],
   templateUrl: './sports.component.html',
   styleUrls: ['./sports.component.scss']
@@ -17,11 +21,13 @@ import { AuthService } from '../../service/auth.service';
 export class SportsComponent implements OnInit {
 
   private readonly authService = inject(AuthService);
+  private readonly logger = inject(LOGGER);
 
   sportsCard!: Card[];
 
   ngOnInit(): void {
-    console.log('Sports Component: ' + this.authService.whoAmI());
+    this.logger.log();
+    // console.log('Sports Component: ' + this.authService.whoAmI());
     this.sportsCard = [
       {
         id: '1',
