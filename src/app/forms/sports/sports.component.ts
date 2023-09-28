@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Card } from '../../components/card/card.model';
 import { CardComponent } from '../../components/card/card.component';
@@ -6,14 +6,17 @@ import { AuthService } from '../../service/auth.service';
 import { LoggerService } from '../../service/logger.service';
 import { NewLoggerService } from '../../service/new-logger.service';
 import { LOGGER } from '../../service/logger';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { SportsStore } from './sports.store';
 
 @Component({
   selector: 'app-sports',
   standalone: true,
-  imports: [CommonModule, CardComponent],
+  imports: [CommonModule, CardComponent, HttpClientModule],
   providers: [
     AuthService,
-    {provide: LOGGER, useClass: LoggerService}
+    {provide: LOGGER, useClass: LoggerService},
+    SportsStore
   ],
   templateUrl: './sports.component.html',
   styleUrls: ['./sports.component.scss']
@@ -21,29 +24,19 @@ import { LOGGER } from '../../service/logger';
 export class SportsComponent implements OnInit {
 
   private readonly authService = inject(AuthService);
-  private readonly logger = inject(LOGGER);
-
-  sportsCard!: Card[];
+  readonly sportsStore = inject(SportsStore);
 
   ngOnInit(): void {
-    this.logger.log();
-    // console.log('Sports Component: ' + this.authService.whoAmI());
-    this.sportsCard = [
-      {
-        id: '1',
-        name: 'Football',
-        price: 1500,
-        imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/1/1d/Football_Pallo_valmiina-cropped.jpg',
-        description: 'Football description'
-      },
-      {
-        id: 'id2',
-        name: 'Football Boot',
-        price: 6000,
-        imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/AdidasEtruscoBoot.jpg/230px-AdidasEtruscoBoot.jpg',
-        description: 'Football description'
-      }
-    ];
+   this.sportsStore.fetchSports();
+   setTimeout(() => {
+     this.sportsStore.saveSport({
+       id: 'test 2',
+       name: 'Test 2',
+       description: 'test 2',
+       price: 603.55,
+       imageUrl: ''
+     });
+   }, 5000)
   }
 
 }

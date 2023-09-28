@@ -1,0 +1,62 @@
+{
+  "sports": [
+    {
+      "id": "c8ebd2e7-c846-4e11-b668-dc2e93d89b1f",
+      "name": "Football",
+      "price": 1555,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Football_Pallo_valmiina-cropped.jpg",
+      "description": "Football description"
+    },
+    {
+      "id": "7f6f5c1a-5822-4a03-af9e-2fcb9f58e7f4",
+      "name": "Football Boot",
+      "price": 6000,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/AdidasEtruscoBoot.jpg/230px-AdidasEtruscoBoot.jpg",
+      "description": "Football description"
+    },
+    {
+      "id": "7f6f5c231a-5822-4a03-af9e-2fcb9f58e7f4",
+      "name": "Volleyball",
+      "price": 650,
+      "imageUrl": "",
+      "description": "Volley description"
+    },
+    {
+      "id": "c8ebd2e7-c846-4e11-b668-dc2e93d89b23",
+      "name": "Cricket Bat",
+      "price": 1534,
+      "imageUrl": "",
+      "description": "Cricket Bat"
+    },
+    {
+      "id": "test",
+      "name": "Test",
+      "description": "test",
+      "price": 600.55,
+      "imageUrl": ""
+    },
+    {
+      "id": "test 2",
+      "name": "Test 2",
+      "description": "test 2",
+      "price": 603.55,
+      "imageUrl": ""
+    }
+  ],
+  "grocery": [
+    {
+      "id": "67612115-1de1-4c0e-b6a6-e7317b6686ea",
+      "name": "Onion",
+      "price": 500,
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcA6JFkXQcKYPMFDt-sPSS_rs6Od8bWkF4KQ&usqp=CAU",
+      "description": "Onion description"
+    },
+    {
+      "id": "0a40af13-d0c9-4a1a-9a22-242eaf0c936d",
+      "name": "Lemon",
+      "price": 600,
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKIlWVg8HN4NH2HPrbhVKv0bQ-F_35Chk2bjuqF0JBZ_Z1kiTDKFP7h4p0Pi9aKhvATP4&usqp=CAU",
+      "description": "Grocery description"
+    }
+  ]
+}
