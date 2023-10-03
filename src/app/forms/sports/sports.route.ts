@@ -6,3 +6,10 @@ export const routes: Route[] = [
   { path: '', component: SportsComponent },
   { path: 'card-item/:id', component: CardItemComponent }
 ];
+
+/*
+
+signals -> synchronous reactivity, great for state management
+
+rxjs -> events, source
+ */

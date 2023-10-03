@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from './components/card/card.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SportsComponent } from './forms/sports/sports.component';
 import { RouterOutlet } from '@angular/router';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { filter, map, Observable, of, Subscription, take } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -20,14 +21,58 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
 
-  firstName!: FormControl;
+  observable!: Observable<number>;
+  subscription!: Subscription;
+  private secondSub!: Subscription;
 
-  ngOnInit() {
-    this.firstName = new FormControl('Ava', [Validators.required, Validators.minLength(5)]);
-    this.firstName.valueChanges.subscribe(val => console.log(val));
-    console.log(JSON.stringify(this.firstName.errors));
+  ngOnInit(): void {
+    // initializing an observable
+    this.observable = new Observable(subscriber => {
+      // emitting next value
+      subscriber.next(101);
+      subscriber.next(1);
+      setTimeout(() => subscriber.next(2), 1000);
+
+      setTimeout(() => {
+        // after 7 seconds emitting value 66
+        subscriber.next(66);
+        // after 7 seconds completing the observable meaning observable is done emitting the value
+        subscriber.complete();
+      }, 7000);
+    });
+
+    this.subscription = this.observable.pipe(
+    ).subscribe({
+      next(val) {
+        console.log(`from first next val is ${val}`);
+      },
+      error(err) {
+        console.log(`something went wrong: ${err}`);
+      },
+      complete() {
+        console.log('completed');
+      }
+    });
+
+    setTimeout(() => {
+      this.secondSub = this.observable.pipe().subscribe({
+        next(val) {
+          console.log(`from second sub next val is ${val}`);
+        },
+        error(err) {
+          console.log(`from second sub something went wrong: ${err}`);
+        },
+        complete() {
+          console.log('from second sub completed');
+        }
+      });
+    }, 2000)
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
 

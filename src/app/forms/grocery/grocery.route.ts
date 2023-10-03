@@ -7,20 +7,3 @@ export const routes: Route[] = [
   { path: 'card-item/:id', component: CardItemComponent }
 ];
 
-
-/*
-
-component -> light weight
-
-heavy lifting -> http calls -> service
-
-grocery -> grocery list from server (service)
-
-AuthService -> stores authservice -> anyone request -> Injector ()
-
-Map ->
-(key, value)
-
-(authService, AuthService) --->
-
- */
